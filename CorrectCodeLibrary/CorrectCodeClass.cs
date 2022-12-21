@@ -32,8 +32,17 @@ namespace CorrectCodeLibrary
             {
                 return false;
             }
+            /*if(!candidate.All(x => Char.IsNumber(x)))
+            {
+                return false;
+            }*/
+
+            if(candidate.Any(x => !Char.IsNumber(x))){
+                return false;
+            }
+
             //если сумма первых 9 цифр делится на 10, то в конце должен стоять 0
-            for (int i = 0; i < candidate.Length; i++)
+            for (int i = 0; i < candidate.Length - 1; i++)
             {
                 sum += Char.GetNumericValue(candidate[i]);
             }
@@ -46,8 +55,12 @@ namespace CorrectCodeLibrary
             {
                 return true;
             }
-
-            return true;
+            //во всех остальных случаях в конце кода стоит цифра 9.
+            if(candidate[candidate.Length - 1] == '9')
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
